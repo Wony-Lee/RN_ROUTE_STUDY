@@ -7,69 +7,60 @@
  */
 
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from "./screens/HomeScreen";
-import DetailScreen from "./screens/DetailScreen";
-import {Text, TouchableOpacity, View} from "react-native";
-import HeaderLessScreen from "./screens/HeaderLessScreen";
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import {Button, Text, View} from "react-native";
 
-const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const HomeScreen = ({navigation}) => {
+  return (
+    <View>
+      <Text>Home</Text>
+      <Button
+        title={"Drawer 열기"}
+        onPress={() => navigation.openDrawer()}
+      />
+      <Button
+        title={"Setting 열기"}
+        onPress={() => navigation.navigate('Setting')}
+      />
+    </View>
+  )
+}
+
+const SettingScreen = ({navigation}) => {
+  return (
+    <View>
+      <Text>Settings</Text>
+      <Button
+        title={"뒤로가기"}
+        onPress={() => navigation.goBack()}
+      />
+    </View>
+  )
+}
+
 
 const App = () => {
   return (
+
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={"Home"} >
-        <Stack.Screen
-          name={"Home"}
-          component={HomeScreen}
-          options={{
-            title:'홈',
-            //header 블록에 대한 스타일
-            headerStyle: {
-              backgroundColor:'#29b6f6',
-            },
-            // header 의 텍스트, 버튼들 색상
-            headerTintColor:'#ffffff',
-            // 타이틀 텍스트의 스타일
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              fontSize: 20,
-            }
-          }}
-        />
-        <Stack.Screen
-          name={"Detail"}
-          component={DetailScreen}
-          options={{
-            headerBackVisible:false,
-            headerLeft: ({onPress}) => (
-              <TouchableOpacity onPress={onPress}>
-                <Text>Left</Text>
-              </TouchableOpacity>
-            ),
-            headerTitle: ({children}) => (
-              <View>
-                <Text>
-                  {children}
-                </Text>
-              </View>
-            ),
-            headerRight: () => (
-              <View>
-                <Text>Right</Text>
-              </View>
-            )
-          }}
-        />
-        <Stack.Screen
-          name={"HeaderLess"}
-          component={HeaderLessScreen}
-          options={{
-            headerShown:false,
-          }}
-        />
-      </Stack.Navigator>
+      <Text>Hello</Text>
+      {/*<Drawer.Navigator*/}
+      {/*  initialRouteName={"Home"}*/}
+      {/*  drawerPosition={"left"}*/}
+      {/*  backBehavior={"history"}*/}
+      {/*>*/}
+      {/*  <Drawer.Screen*/}
+      {/*    name={"Home"}*/}
+      {/*    component={HomeScreen}*/}
+      {/*  />*/}
+      {/*  <Drawer.Screen*/}
+      {/*    name={"Setting"}*/}
+      {/*    component={SettingScreen}*/}
+      {/*  />*/}
+      {/*</Drawer.Navigator>*/}
     </NavigationContainer>
   )
 };
