@@ -8,61 +8,28 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer'
-import {Button, Text, View} from "react-native";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import MainScreen from "./screens/MainScreen";
+import DetailScreen from './screens/DetailScreen'
 
-const Drawer = createDrawerNavigator();
-
-const HomeScreen = ({navigation}) => {
-  return (
-    <View>
-      <Text>Home</Text>
-      <Button
-        title={"Drawer 열기"}
-        onPress={() => navigation.openDrawer()}
-      />
-      <Button
-        title={"Setting 열기"}
-        onPress={() => navigation.navigate('Setting')}
-      />
-    </View>
-  )
-}
-
-const SettingScreen = ({navigation}) => {
-  return (
-    <View>
-      <Text>Settings</Text>
-      <Button
-        title={"뒤로가기"}
-        onPress={() => navigation.goBack()}
-      />
-    </View>
-  )
-}
-
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-
     <NavigationContainer>
-      <Text>Hello</Text>
-      {/*<Drawer.Navigator*/}
-      {/*  initialRouteName={"Home"}*/}
-      {/*  drawerPosition={"left"}*/}
-      {/*  backBehavior={"history"}*/}
-      {/*>*/}
-      {/*  <Drawer.Screen*/}
-      {/*    name={"Home"}*/}
-      {/*    component={HomeScreen}*/}
-      {/*  />*/}
-      {/*  <Drawer.Screen*/}
-      {/*    name={"Setting"}*/}
-      {/*    component={SettingScreen}*/}
-      {/*  />*/}
-      {/*</Drawer.Navigator>*/}
+      <Stack.Navigator>
+        <Stack.Screen
+          name={"Main"}
+          component={MainScreen}
+          options={{headerShown:false}}
+        />
+        <Stack.Screen
+          name={"Detail"}
+          component={DetailScreen}
+          />
+      </Stack.Navigator>
     </NavigationContainer>
   )
-};
+}
 
 export default App;
