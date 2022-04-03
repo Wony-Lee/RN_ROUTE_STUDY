@@ -1,8 +1,34 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {Button, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+
+const OpenDetailButton = () => {
+  const navigation = useNavigation();
+  return (
+    <Button title={'이동'} onPress={() => navigation.push('Detail', {id: 1})} />
+  );
+};
+
+const HomeScreen = () => {
+  useFocusEffect(
+    useCallback(() => {
+      console.log('메인 화면');
+      return () => {
+        console.log('다른 화면');
+      };
+    }, []),
+  );
+
+  return (
+    <View>
+      <Text>Home</Text>
+      <OpenDetailButton />
+    </View>
+  );
+};
 
 const Tab = createMaterialBottomTabNavigator();
 const SearchScreen = () => {
